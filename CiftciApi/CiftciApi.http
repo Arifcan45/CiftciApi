@@ -1,0 +1,6 @@
+@CiftciApi_HostAddress = http://localhost:5111
+
+GET {{CiftciApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
