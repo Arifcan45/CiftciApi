@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CiftciApi.Models
@@ -12,19 +13,19 @@ namespace CiftciApi.Models
         public int ReviewerId { get; set; }
 
         [ForeignKey("ReviewerId")]
-        public User ?Reviewer { get; set; }
+        public virtual User Reviewer { get; set; }
 
         [Required]
         public int ReviewedUserId { get; set; }
 
         [ForeignKey("ReviewedUserId")]
-        public User ?ReviewedUser { get; set; }
+        public virtual User ReviewedUser { get; set; }
 
         [Required]
         public int Rating { get; set; } // 1-5
 
         [StringLength(500)]
-        public string ?Comment { get; set; }
+        public string Comment { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
     }

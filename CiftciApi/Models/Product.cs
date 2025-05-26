@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CiftciApi.Models
@@ -12,44 +14,57 @@ namespace CiftciApi.Models
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public User ?User { get; set; }
+        public virtual User User { get; set; }
 
         [Required, StringLength(100)]
-        public string ?Name { get; set; }
+        public string Name { get; set; }
 
-        [Required, StringLength(100)]
-        public string ?Category { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
 
-        [StringLength(100)]
-        public string ?SubCategory { get; set; }
+        [ForeignKey("CategoryId")]
+        public virtual ProductCategory Category { get; set; }
+
+        public int? SubCategoryId { get; set; }
+
+        [ForeignKey("SubCategoryId")]
+        public virtual ProductSubCategory SubCategory { get; set; }
 
         [Required]
         public double Quantity { get; set; }
 
-        [Required]
-        public string ?Unit { get; set; } // kg, ton, adet vb.
+        [Required, StringLength(20)]
+        public string Unit { get; set; } // kg, ton, adet vb.
 
         [Required]
         public decimal PricePerUnit { get; set; }
 
-        public string ?FieldSize { get; set; } // Örn: "3 dönüm alan"
+        [StringLength(100)]
+        public string FieldSize { get; set; } // Örn: "3 dönüm alan"
 
-        [Required]
-        public double Latitude { get; set; }
+        public int? LocationId { get; set; }
 
-        [Required]
-        public double Longitude { get; set; }
+        [ForeignKey("LocationId")]
+        public virtual Location Location { get; set; }
 
-        public string ?VideoUrl { get; set; }
+        public virtual ICollection<Media> Media { get; set; }
 
-        public string ?ImageUrl { get; set; }
+        public ProductStatus Status { get; set; } = ProductStatus.Available;
 
-        public bool IsAvailable { get; set; } = true;
+        public DateTime? HarvestDate { get; set; }
 
-        public DateTime HarvestDate { get; set; }
+        [StringLength(500)]
+        public string Description { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime? UpdatedAt { get; set; }
+    }
+
+    public enum ProductStatus
+    {
+        Available = 1,
+        Reserved = 2,
+        Sold = 3
     }
 }
