@@ -33,6 +33,10 @@ namespace CiftciApi.Models
         // Çiftçi için ek alanlar
         public int? LocationId { get; set; }
         public virtual Location Location { get; set; }
+        public string Province { get; set; } // İl
+        public string District { get; set; } // İlçe
+        public string Village { get; set; } // Köy
+
 
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Review> ReviewsReceived { get; set; }

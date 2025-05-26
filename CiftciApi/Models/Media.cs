@@ -13,15 +13,15 @@ namespace CiftciApi.Models
         public int ProductId { get; set; }
 
         [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
+        public virtual Product ?Product { get; set; }
 
         [Required, StringLength(500)]
-        public string Url { get; set; }
+        public string ?Url { get; set; }
 
         [Required]
         public MediaType Type { get; set; }
 
-        public string ThumbnailUrl { get; set; }
+        public string ?ThumbnailUrl { get; set; }
 
         public bool IsMain { get; set; }
 
